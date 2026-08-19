@@ -3,9 +3,11 @@ import { Geist, Geist_Mono, Raleway, Figtree, Noto_Sans, Inter } from "next/font
 import "./globals.css";
 import Navbar from "@/components/ui/navbar";
 import { ThemeProvider } from "@/components/themeprovider";
-import Footer from "@/components/ui/footer";
+
+import AppSidebar from "@/components/ui/appsidebar";
 import { cn } from "@/lib/utils";
 import {AuthProvider} from "@/contexts/authContext";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 const interHeading = Inter({subsets:['latin'],variable:'--font-heading'});
 
 const notoSans = Noto_Sans({subsets:['latin'],variable:'--font-sans'});
@@ -51,13 +53,25 @@ export default function RootLayout({
     >
       
               
-        <Navbar />
-
-        <main >
+       <SidebarProvider defaultOpen={false}>
+      
+        
+    
+     
+        
+<AppSidebar/>
+        <main className='flex-1' >
+          
+            
+           <Navbar />
           {children}
+        
         </main>
+      
+    
 
-        <Footer />
+        
+       </SidebarProvider>
 
      
 

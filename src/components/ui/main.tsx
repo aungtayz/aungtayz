@@ -7,7 +7,7 @@ export default function Main() {
       
           <div
           className="bg-cover w-full snap-start bg-center p-10 rounded-lg shadow-lg 
-         h-[80vh] flex justify-center items-center flex-col text-center"
+         h-[95vh] md:h-[90vh] flex justify-center items-center flex-col text-center"
           style={{ backgroundImage: "url('/unsplashtwo.png')" }}
         >
           <h1 className="text-3xl text-white font-bold">Welcome to Luxavian</h1>

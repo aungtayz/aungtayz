@@ -6,6 +6,7 @@ import Section from "@/components/layouts/section";
 
 
 import RegisterPage from "@/components/ui/registert";
+import Footer from "@/components/ui/footer";
 export default function Home() {
   return (
    
@@ -15,8 +16,10 @@ export default function Home() {
        
         
       
-        <Main/>
-      
+      <div className="flex flex-col flex-1">
+          <Main/>
+        <Footer />
+      </div>
    
           
 
