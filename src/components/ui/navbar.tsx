@@ -7,7 +7,7 @@ import { ModeToggle } from "./themeToggle"
 import Image from "next/image"
 import AvatarDropDown from "./avatardrop"
 import { SidebarTrigger } from "./sidebar"
-import Link from "next/dist/client/link"
+import Link from "next/link"
 
 export default function Navbar() {
  
