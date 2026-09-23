@@ -23,7 +23,7 @@ return (
 			<h1><span className="text-amber-400 text-size-lg">Lux</span>avian</h1>
 		</div>
 <div className="flex backdrop-blur-lg justify-evenly gap-2">
-	<Button variant={"link"} ><Link href={'/explore'}>Explore</Link></Button>
+	<Button variant={"secondary"} ><Link href={'/explore'}>Explore</Link></Button>
 			<AvatarDropDown	/>
 		<ModeToggle/>
 

@@ -14,18 +14,19 @@ const {user} = useAuth()
 
 
  return user?
- <Card className="shadow-lg w-full flex flex-row gap-4 ">
+ <Card className="shadow-lg  items-center flex flex-row gap-4 ">
   <CardHeader >
-    <Avatar>
+    <Avatar onClick={() => router.push('/profile')}>
       <AvatarImage src="/placeholder-avatar.jpg" />
       <AvatarFallback><User /></AvatarFallback>
     </Avatar>
     
   </CardHeader>
 
-  <CardContent>
+  <CardContent >
     <p className='text-xs font-semibold'>{user?.name}</p>
-   <p className='text-xs font-muted-foreground'>{user?.email}</p>
+
+
     </CardContent>
  </Card> :  <Card className='w-full shadow-lg flex flex-col justify-center items-center'>
   <h1>You are not logged in</h1>
