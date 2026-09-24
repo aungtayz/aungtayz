@@ -2,6 +2,7 @@
 import { createContext,useState, useEffect, useContext } from "react";
 import {useRouter} from 'next/navigation';
 
+
 type User = { 
  
  name: string;
@@ -45,9 +46,10 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
      return
     }
     const data = await response.json();
-    const fetchedUser = data?.data?.user ?? data?.user ?? null;
+    const fetchedUser = data?.data?.user ?? data?.user ?? null
     if(!fetchedUser) {
       setUser(null)
+      alert(data.message)
     } else {
       setUser(fetchedUser)
     }
@@ -77,15 +79,17 @@ const login = async (credentials: {email: string; password: string, name?: strin
          headers: {'Content-Type': 'application/json'},
          body: JSON.stringify(credentials)
       })
+      const data = await response.json()
       if(!response.ok) {
-         throw new Error(`Authentication failed with status ${response.status}`)
+         throw new Error(data.message)
       }
-      const data = await response.json();
+  
       const loggedInUser = data?.data?.user ?? data?.user ?? null;
 
       if(endpoint.includes('signup')) {
          if(!loggedInUser) {
-            throw new Error('No temporary user returned from signup response')
+            
+            throw new Error(data.message)
          }
 
          setUser(null)
@@ -96,7 +100,8 @@ const login = async (credentials: {email: string; password: string, name?: strin
       }
 
       if(!loggedInUser) {
-         throw new Error('No user returned from auth response')
+         
+         throw new Error(data.message)
       }
 
       setUser(loggedInUser)
@@ -145,11 +150,12 @@ try {
    const verifiedUser = data?.data?.user ?? data?.user ?? null;
 
    if(!response.ok) {
-      throw new Error(`Verification failed with status ${response.status}`)
+      throw new Error(data.message)
    }
 
    if(!verifiedUser) {
-      throw new Error('No user returned from verification response')
+     
+      throw new Error(data.message)
    }
 
    setOTPuser(null);
@@ -157,7 +163,8 @@ try {
    setLoading(false);
    router.replace('/profile');
 } catch(err) {
-   console.error('Verification failed', err);
+   throw new Error(err instanceof Error ? err.message: String(err) );
+   
 }
 
 }

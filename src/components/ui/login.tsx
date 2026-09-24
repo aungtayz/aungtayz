@@ -15,6 +15,7 @@ export default function LoginPage({handler}: any) {
  
 const {login, loading} = useAuth();
  const [showPassword, setShowPassword] = useState(false)
+ const [errorMessage, setErrorMessage] = useState('')
  const [formData, setFormData] = useState({
   email: '',
   password: '',
@@ -39,11 +40,12 @@ const handleChange = (e: any) => {
 
 const handleSubmit = async (e: any) => {
  e.preventDefault();
+ setErrorMessage('')
  try {
 await login(formData);
  }
   catch (err) {
-  throw new Error('Failed to submit form data')
+    setErrorMessage(err instanceof Error ? err.message : String(err))
  }
 }
 
@@ -58,6 +60,7 @@ await login(formData);
 <form className="flex gap-4 mx-auto w-full flex-col" onSubmit={handleSubmit}> 
 <label>
  <h3>Email</h3>
+
 <Input  type='email' value={formData.email} onChange={handleChange}  required  name="email" placeholder="Enter your email" />
 </label>
 
@@ -71,6 +74,8 @@ await login(formData);
  </div>
 </label>
 {loading ?  <Button><Loader></Loader></Button> : <Button type="submit" variant={'default'} >Submit</Button>}
+
+ {errorMessage && <p className="md: max-w-[20vw] text-sm text-red-500" role="alert">{errorMessage}</p>}
 </form>
 
  </CardContent>
